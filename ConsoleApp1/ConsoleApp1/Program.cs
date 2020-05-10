@@ -21,18 +21,21 @@ namespace OOP_UPR_10
         }
         static void Main(string[] args)
         {
+            Console.Write("Какая программа: ");
             switch (Convert.ToInt32(Console.ReadLine()))
-            {
-                case 1:
-
+            {       
+                case 1: // Первая программа
                     Console.Write("Изначальное число: ");
                     ArifmeticCalcul calcul = new ArifmeticCalcul(Convert.ToDouble(Console.ReadLine()));
+                    //Добавление обработчика для события
                     calcul.Print += Calcul_Print;
+                    // Создаем для каждого свой лог
                     Stack<double> log = new Stack<double>();
                     Stack<double> logAdd = new Stack<double>();
                     Stack<double> logMin = new Stack<double>();
                     Stack<double> logDiv = new Stack<double>();
                     Stack<double> logMult = new Stack<double>();
+
                     double tempAdd,tempMin,tempDiv,tempMult;
                     bool exit = true;
                     do
@@ -94,11 +97,40 @@ namespace OOP_UPR_10
                         }
                     } while (exit);
                     break;
-                case 2:
-                    //Вторая программа
+                case 2:  //Вторая программа
+                    Console.Write("С помощью List - 1, Dictionary - 2 : ");
+                    switch (Convert.ToInt32(Console.ReadLine()))
+                    {
+                        //С помощью List
+                        case 1:
+                            List<Worker> workers = new List<Worker>();
+                            workers.Add(new Worker("Дима", new Id(2)));
+                            workers.Add(new Worker("Вика", new Id(6)));
+                            workers.Add(new Worker("Кирилл", new Id(2)));
+                            foreach (Worker item in workers)
+                            {
+                                if (item.Id.ID == 2) Console.WriteLine($"{item.Name} {item.Id.ID}\n");
+                            }
+                            break;
+                        //С помощью Dictionary
+                        case 2:
+                            Dictionary<Id, Trader> workersD = new Dictionary<Id, Trader>();
+                            workersD.Add(new Id(7), new Trader("Игорь", 100000));
+                            workersD.Add(new Id(3), new Trader("Мария", 5000000));
+                            workersD.Add(new Id(3), new Trader("Виктория", 5255));
+                            workersD.Add(new Id(5), new Trader("Зюзя", 40000));
+                            foreach (KeyValuePair<Id,Trader> item in workersD)
+                            {
+                                if (item.Key.ID == 3) Console.WriteLine($"{item.Key.ID} {item.Value.Name} {item.Value.Balance}");
+                            }
+                            break;
+                        default:
+                            break; //степа лох объелся блох :)))))))))))))))))))) :^)
+                    }
                     break;
                 default:
                     break;
+
             }
         }
     }
